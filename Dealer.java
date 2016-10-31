@@ -11,8 +11,8 @@ public class Dealer {
 		System.out.println(cards.get(0) + " X_X");
 	}
 
-	public void move() {
-
+	public boolean move() {
+		return sumCards() < 17;
 	}
 
 	public int sumCards() {
@@ -37,5 +37,16 @@ public class Dealer {
 		}
 
 		return sum;
+	}
+
+	public void showCards() {
+		for (Card c : cards) {
+			System.out.print(c + " ");
+		}
+		System.out.println();
+	}
+
+	public void clearCards() {
+		cards.clear();
 	}
 }

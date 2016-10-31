@@ -5,9 +5,11 @@ import java.util.InputMismatchException;
 public class Player {
 	private double funds;
 	private ArrayList<Card> cards = new ArrayList<Card>();
+	private double buyIn;
 
 	public Player(double buyIn) {
 		this.funds = buyIn;
+		this.buyIn = buyIn;
 	}
 
 	public void addCard(Card c) {
@@ -36,7 +38,11 @@ public class Player {
 			try {
 				int bet = in.nextInt();
 				if (bet <= funds) {
-					return bet;
+					if (bet >= 10.0 && bet <= 1000.0) {
+						return bet;
+					} else {
+						System.err.println("Minimum bet is $10, maximum bet is $1000");
+					}
 				} else {
 					System.err.println("Invalid bet: exceeds funds");
 				}
@@ -68,5 +74,21 @@ public class Player {
 		}
 
 		return sum;
+	}
+
+	public void win(double bet) {
+		funds += (1.5 * bet);
+	}
+
+	public void lose(double bet) {
+		funds -= bet;
+	}
+
+	public void clearCards() {
+		cards.clear();
+	}
+
+	public double getReturn() {
+		return this.funds - this.buyIn;
 	}
 }
